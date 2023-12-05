@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1096059743234",
+    "project_id": "circula-apps-5ae00",
+    "storage_bucket": "circula-apps-5ae00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096059743234:android:fcc347764fad36139c0b1b",
+        "android_client_info": {
+          "package_name": "com.example.finalproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANSKM8g-dglcP--P4rUazFWYfanmKfc28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
