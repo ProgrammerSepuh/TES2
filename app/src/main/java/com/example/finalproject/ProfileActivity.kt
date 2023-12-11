@@ -18,7 +18,7 @@ class ProfileActivity : AppCompatActivity() {
 
         val currentUser: FirebaseUser? = firebaseAuth.currentUser
 
-        // Mengambil informasi pengguna yang sedang login
+        // Mengambil informasi pengguna yang sedang loginaaa
         val userEmail = currentUser?.email
         val userId = currentUser?.uid
 
