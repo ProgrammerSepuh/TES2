@@ -22,6 +22,7 @@ class ProfileActivity : AppCompatActivity() {
         val userEmail = currentUser?.email
         val userId = currentUser?.uid
 
+
         // Menampilkan informasi pengguna di dalam aplikasi
         val userEmailTextView = findViewById<TextView>(R.id.userEmailTextView)
         val userIdTextView = findViewById<TextView>(R.id.userIdTextView)

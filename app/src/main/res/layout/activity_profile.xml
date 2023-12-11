@@ -34,4 +34,19 @@
         android:layout_height="wrap_content"
         android:textSize="16sp" />
 
+    <TextView
+        android:id="@+id/textUsername"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User ID:"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/ussername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+
 </LinearLayout>
