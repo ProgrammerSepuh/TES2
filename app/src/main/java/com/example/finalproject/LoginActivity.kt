@@ -26,24 +26,38 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // ...
         binding.btnlogin.setOnClickListener {
             val email = binding.emailEt.text.toString()
             val pass = binding.passET.text.toString()
 
             if (email.isNotEmpty() && pass.isNotEmpty()) {
-                firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        val intent = Intent(this, MainActivity::class.java)
+                firebaseAuth.signInWithEmailAndPassword(email, pass)
+                    .addOnSuccessListener { authResult ->
+                        // Mengakses informasi pengguna yang login
+                        val user = authResult.user
+                        val userEmail = user?.email // Mendapatkan alamat email pengguna
+
+                        // Menyiapkan intent untuk membawa informasi pengguna ke ProfileActivity
+                        val intent = Intent(this, ProfileActivity::class.java)
+                        intent.putExtra("user_email", userEmail) // Mengirim data email pengguna ke ProfileActivity
                         startActivity(intent)
-                        finish()  // Optional: finish the current activity
-                    } else {
-                        Toast.makeText(this, it.exception?.message, Toast.LENGTH_SHORT).show()
+
+                        // Optional: Menutup LoginActivity setelah berhasil login
+                        finish()
                     }
-                }
+                    .addOnFailureListener { e ->
+                        // Penanganan kesalahan jika login gagal
+                        Toast.makeText(this, "Login gagal: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
             } else {
                 Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
             }
         }
+
+        }
+// ...
+
     }
 
 //    override fun onStart() {
@@ -54,4 +68,4 @@ class LoginActivity : AppCompatActivity() {
 //            finish()
 //        }
 //    }
-}
+
