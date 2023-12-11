@@ -27,30 +27,29 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.button).setOnClickListener {
+
             val email = findViewById<EditText>(R.id.emailEt).text.toString()
             val pass = findViewById<EditText>(R.id.passET).text.toString()
-            val confirmPass = findViewById<EditText>(R.id.confirmPassEt).text.toString()
+            val username = findViewById<EditText>(R.id.usernemeEt).text.toString()
 
-            if (email.isNotEmpty() && pass.isNotEmpty() && confirmPass.isNotEmpty()) {
-                if (pass == confirmPass) {
-                    // Create a user in Firebase Authentication
-                    firebaseAuth.createUserWithEmailAndPassword(email, pass)
-                        .addOnCompleteListener { authTask ->
-                            if (authTask.isSuccessful) {
-                                // Save user details to Realtime Database with email as the key
-                                val userId = email.replace(".", "_") // Firebase doesn't allow dots in keys
-                                val userRef = database.reference.child("users").child(userId)
-                                userRef.child("email").setValue(email)
+            if (email.isNotEmpty() && pass.isNotEmpty() && username.isNotEmpty()) {
+                // Validate other conditions if needed
 
-                                val intent = Intent(this, LoginActivity::class.java)
-                                startActivity(intent)
-                            } else {
-                                Toast.makeText(this, authTask.exception.toString(), Toast.LENGTH_SHORT).show()
-                            }
+                // Create a user in Firebase Authentication
+                firebaseAuth.createUserWithEmailAndPassword(email, pass)
+                    .addOnCompleteListener { authTask ->
+                        if (authTask.isSuccessful) {
+                            // Save user details to Realtime Database with username as the key
+                            val userId = username.replace(".", "_") // Firebase doesn't allow dots in keys
+                            val userRef = database.reference.child("users").child(userId)
+                            userRef.child("email").setValue(email)
+
+                            val intent = Intent(this, LoginActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(this, authTask.exception.toString(), Toast.LENGTH_SHORT).show()
                         }
-                } else {
-                    Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
-                }
+                    }
             } else {
                 Toast.makeText(this, "Empty Fields Are not Allowed fffff!!", Toast.LENGTH_SHORT).show()
             }

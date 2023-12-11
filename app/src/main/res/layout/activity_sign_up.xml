@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
-        android:id="@+id/passET"
+        android:id="@+id/usernemeEt"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -70,7 +70,7 @@
         />
 
     <EditText
-        android:id="@+id/confirmPassEt"
+        android:id="@+id/passET"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -83,7 +83,7 @@
         android:longClickable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passET"
+        app:layout_constraintTop_toBottomOf="@+id/usernemeEt"
         />
 
     <Button
@@ -98,7 +98,7 @@
         android:background="@drawable/rounded_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPassEt"
+        app:layout_constraintTop_toBottomOf="@+id/passET"
         />
 
     <TextView
