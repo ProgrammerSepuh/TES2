@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnlogin.setOnClickListener {
             val email = binding.emailEt.text.toString()
             val pass = binding.passET.text.toString()
-        //asasjajsajsjasj
+        //asasjajsajsjasjaaaa
             if (email.isNotEmpty() && pass.isNotEmpty()) {
                 firebaseAuth.signInWithEmailAndPassword(email, pass)
                     .addOnSuccessListener { authResult ->
