@@ -9,41 +9,58 @@
     tools:context=".ProfileActivity"
     tools:ignore="ExtraText">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="412dp"
-        android:layout_height="344dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/bg_welcome"
-        tools:layout_editor_absoluteY="-171dp"
-        tools:ignore="MissingConstraints" />
-
     <TextView
-        android:id="@+id/textName"
+        android:id="@+id/textViewUsernameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="156dp"
-        android:text="Bruno Pham"
+        android:layout_marginTop="352dp"
+        android:text="Name"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.126"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/userIdTextView"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/input_style"
+        android:hint="Username"
+        android:paddingLeft="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUsernameLabel"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textDeskripsi"
+        android:id="@+id/textViewEmailLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Da Nang, Vietnam"
+        android:layout_marginTop="460dp"
+        android:text="Email"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/userEmailTextView"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/input_style"
+        android:hint="brunopham@gmail.com"
+        android:paddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textName" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmailLabel"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
