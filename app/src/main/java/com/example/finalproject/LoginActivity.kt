@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
                         val userEmail = user?.email // Mendapatkan alamat email pengguna
 
                         // Menyiapkan intent untuk membawa informasi pengguna ke ProfileActivity
-                        val intent = Intent(this, ProfileActivity::class.java)
+                        val intent = Intent(this, MainActivity::class.java)
                         intent.putExtra("user_email", userEmail) // Mengirim data email pengguna ke ProfileActivity
                         startActivity(intent)
 
@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
 //    override fun onStart() {
 //        super.onStart()
 //        if (firebaseAuth.currentUser != null) {
-//            val intent = Intent(this, MainActivity::class.java)
+//            val intent = Intent(this, com.example.finalproject.MainActivity::class.java)
 //            startActivity(intent)
 //            finish()
 //        }
