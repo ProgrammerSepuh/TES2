@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/fragmentHome"
+        android:title="Home"
+        android:icon="@drawable/home_btn"/>
+
+    <item android:id="@+id/fragmentExplore"
+        android:title="Explore"
+        android:icon="@drawable/explore_btn"/>
+
+    <item android:id="@+id/placeholder"
+        android:title=""/>
+
+    <item android:id="@+id/fragmentNotification"
+        android:title="Notification"
+        android:icon="@drawable/search_btn"/>
+
+    <item android:id="@+id/fragmentProfile"
+        android:title="Profile"
+        android:icon="@drawable/profile_btn"/>
+</menu>
