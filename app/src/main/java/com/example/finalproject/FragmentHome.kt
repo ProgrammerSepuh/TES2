@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +36,19 @@ class FragmentHome : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val rvKonten: RecyclerView = view.findViewById(R.id.recyclerViewKonten)
+
+        rvKonten.layoutManager = LinearLayoutManager(context)
+
+        val data = ArrayList<KontenModel>()
+        data.add(KontenModel(R.drawable.windah,"Windah","20 jam",R.drawable.bg_welcome,"50","20"))
+
+        val adapter = AdapterHome(data)
+
+        rvKonten.adapter = adapter
+
+        return view
     }
 
     companion object {
