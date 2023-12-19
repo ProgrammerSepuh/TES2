@@ -8,6 +8,8 @@ import com.example.finalproject.FragmentHome
 import com.example.finalproject.FragmentExplore
 import com.example.finalproject.FragmentSearch
 import com.example.finalproject.FragmentProfile
+import android.content.Intent
+import com.example.finalproject.UploadActivity
 import com.example.finalproject.R
 
 class MainActivity : AppCompatActivity() {
@@ -29,18 +31,22 @@ class MainActivity : AppCompatActivity() {
             // For example, you can set the default fragment here
         }
 
-        //floating bottom menu
         val fab: View = findViewById(R.id.fab)
         fab.setOnClickListener {
-            // Handle click on the FloatingActionButton here
-            // You may want to replace the fragment or perform other actions
-            // Example:
-            val homeFragment = FragmentHome()
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fragmentContainer, homeFragment)
-                commit()
-            }
+            // Start the UploadActivity when the FAB is clicked
+            val intent = Intent(this, UploadActivity::class.java)
+            startActivity(intent)
         }
+
+
+//        val fab: View = findViewById(R.id.fab)
+//        fab.setOnClickListener {
+//            val homeFragment = FragmentHome()
+//            supportFragmentManager.beginTransaction().apply {
+//                replace(R.id.fragmentContainer, homeFragment)
+//                commit()
+//            }
+//        }
 
         // Set listener for fragmentHome ImageButton
         val fragmentHomeButton: ImageButton = findViewById(R.id.fragmentHome)
@@ -61,7 +67,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Example for Search ImageButton
         val fragmentSearchButton: ImageButton = findViewById(R.id.fragmentSearch)
         fragmentSearchButton.setOnClickListener {
             val searchFragment = FragmentSearch()
@@ -71,7 +76,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Example for Profile ImageButton
         val fragmentProfileButton: ImageButton = findViewById(R.id.fragmentProfile)
         fragmentProfileButton.setOnClickListener {
             val profileFragment = FragmentProfile()
