@@ -26,33 +26,37 @@ class SignUpActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        findViewById<Button>(R.id.button).setOnClickListener {
 
+
+        findViewById<Button>(R.id.button).setOnClickListener {
             val email = findViewById<EditText>(R.id.emailEt).text.toString()
             val pass = findViewById<EditText>(R.id.passET).text.toString()
             val username = findViewById<EditText>(R.id.usernemeEt).text.toString()
 
             if (email.isNotEmpty() && pass.isNotEmpty() && username.isNotEmpty()) {
-                // Validate other conditions if needed
+                // Validasi tambahan jika diperlukan
 
-                // Create a user in Firebase Authentication
                 firebaseAuth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener { authTask ->
                         if (authTask.isSuccessful) {
-                            // Save user details to Realtime Database with username as the key
-                            val userId = username.replace(".", "_") // Firebase doesn't allow dots in keys
+                            // Menggunakan email sebagai ID pengguna
+                            val userId = email.replace(".", "_")
                             val userRef = database.reference.child("users").child(userId)
                             userRef.child("email").setValue(email)
+                            userRef.child("username").setValue(username)
 
                             val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
+                            finish() // Optional: sebaiknya akhiri aktivitas saat pendaftaran berhasil
                         } else {
-                            Toast.makeText(this, authTask.exception.toString(), Toast.LENGTH_SHORT).show()
+                            val errorMessage = "Registration failed: ${authTask.exception?.message}"
+                            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                         }
                     }
             } else {
-                Toast.makeText(this, "Empty Fields Are not Allowed fffff!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Empty Fields Are not Allowed!!", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 }
