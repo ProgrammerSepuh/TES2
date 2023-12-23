@@ -1,64 +1,112 @@
 package com.example.finalproject
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.finalproject.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
+//class LoginActivity : AppCompatActivity() {
+//
+//    private lateinit var binding: ActivityLoginBinding
+//    private lateinit var firebaseAuth: FirebaseAuth
+//
+//    @SuppressLint("WrongViewCast")
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        binding = ActivityLoginBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+//
+//        firebaseAuth = FirebaseAuth.getInstance()
+//
+//        binding.regisLink.setOnClickListener {
+//            val intent = Intent(this, SignUpActivity::class.java)
+//            startActivity(intent)
+//        }
+//
+//        // ...
+//        // Pada fungsi onCreate() atau fungsi lain yang sesuai
+//// Inisialisasi komponen-komponen yang diperlukan
+//        val editTextEmail = findViewById<EditText>(R.id.emailEt)
+//        val editTextPassword = findViewById<EditText>(R.id.passET)
+//        val buttonLogin = findViewById<Button>(R.id.btnlogin)
+//
+//// Tambahkan onClickListener ke tombol Login
+//        buttonLogin.setOnClickListener {
+//            val email = editTextEmail.text.toString().trim()
+//            val password = editTextPassword.text.toString().trim()
+//
+//            if (email.isNotEmpty() && password.isNotEmpty()) {
+//                // Proses login menggunakan Firebase Authentication
+//                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+//                    .addOnCompleteListener(this) { task ->
+//                        if (task.isSuccessful) {
+//                            // Login berhasil
+//                            Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show()
+//                            val intent = Intent(this, ProfileActivity::class.java) // Ganti BerandaActivity dengan nama Activity selanjutnya
+//                            startActivity(intent)
+//                            finish()
+//                            // Lanjutkan ke halaman beranda atau halaman profil
+//                        } else {
+//                            // Login gagal
+//                            Toast.makeText(this, "Login gagal. Periksa kembali email dan password Anda.", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//            } else {
+//                Toast.makeText(this, "Isi email dan password.", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//
+//
+//    }
+//    }
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        firebaseAuth = FirebaseAuth.getInstance()
-
-        // ... (existing code)
-
-        binding.regisLink.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
+        setContentView(R.layout.activity_login)
+        val reg : TextView = findViewById(R.id.regis_link)
+        reg.setOnClickListener{
+            val intent = Intent(this,SignUpActivity::class.java)
             startActivity(intent)
         }
+        firebaseAuth = FirebaseAuth.getInstance()
 
-        // ...
-        binding.btnlogin.setOnClickListener {
-            val email = binding.emailEt.text.toString()
-            val pass = binding.passET.text.toString()
-        //asasjajsajsjasjaaaasaa
-            if (email.isNotEmpty() && pass.isNotEmpty()) {
-                firebaseAuth.signInWithEmailAndPassword(email, pass)
-                    .addOnSuccessListener { authResult ->
-                        // Mengakses informasi pengguna yang login
-                        val user = authResult.user
-                        val userEmail = user?.email // Mendapatkan alamat email pengguna
+        val emailEditText = findViewById<EditText>(R.id.emailEt)
+        val passwordEditText = findViewById<EditText>(R.id.passET)
+        val loginButton = findViewById<Button>(R.id.btnlogin)
 
-                        // Menyiapkan intent untuk membawa informasi pengguna ke ProfileActivity
-                        val intent = Intent(this, MainActivity::class.java)
-                        intent.putExtra("user_email", userEmail) // Mengirim data email pengguna ke ProfileActivity
-                        startActivity(intent)
+        loginButton.setOnClickListener {
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
-                        // Optional: Menutup LoginActivity setelah berhasil login
-                        finish()
-                    }
-                    .addOnFailureListener { e ->
-                        // Penanganan kesalahan jika login gagal
-                        Toast.makeText(this, "Login gagal: ${e.message}", Toast.LENGTH_SHORT).show()
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            // Login berhasil, arahkan ke halaman profil
+                            val intent = Intent(this@LoginActivity, ProfileActivity::class.java)
+                            startActivity(intent)
+                            finish() // Sebaiknya akhiri activity saat login berhasil
+                        } else {
+                            // Login gagal, tampilkan pesan kesalahan
+                            Toast.makeText(this@LoginActivity, "Login gagal. Periksa kembali email dan password Anda.", Toast.LENGTH_SHORT).show()
+                        }
                     }
             } else {
-                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
+                // Tampilkan pesan jika field email atau password kosong
+                Toast.makeText(this@LoginActivity, "Isi email dan password.", Toast.LENGTH_SHORT).show()
             }
         }
-
-        }
-// ...
-
     }
+}
 
 //    override fun onStart() {
 //        super.onStart()

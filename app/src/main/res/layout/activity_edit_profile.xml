@@ -40,11 +40,11 @@
         app:layout_constraintTop_toBottomOf="@+id/profileImage1" />
 
     <TextView
-        android:id="@+id/textViewUsername"
+        android:id="@+id/editTextEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Name"
+        android:text="i dont know"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,39 +53,39 @@
         app:layout_constraintTop_toBottomOf="@+id/profileImage1" />
 
     <EditText
-        android:id="@+id/userIdTextView"
+        android:id="@+id/editEmail"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:background="@drawable/input_style"
-        android:hint="Username"
+        android:hint="i donwt know"
         android:paddingLeft="20dp"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
 
     <TextView
         android:id="@+id/textViewLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Last Name"
+        android:text="Username"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userIdTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
     <EditText
-        android:id="@+id/userIdTextView2"
+        android:id="@+id/editUsername"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:background="@drawable/input_style"
-        android:hint="Last Name"
+        android:hint="username"
         android:paddingLeft="20dp"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,13 +98,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Email"
+        android:text="test"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userIdTextView2" />
+        app:layout_constraintTop_toBottomOf="@+id/editUsername" />
 
     <EditText
         android:id="@+id/userEmailTextView"
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:background="@drawable/input_style"
-        android:hint="Last Name"
+        android:hint="test"
         android:paddingLeft="20dp"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,10 +121,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonUpdate"
         android:layout_width="320dp"
         android:layout_height="55dp"
         android:layout_marginTop="88dp"
+        android:text="UPDATE"
         android:background="@drawable/rounded_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
