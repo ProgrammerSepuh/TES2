@@ -92,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             // Login berhasil, arahkan ke halaman profil
-                            val intent = Intent(this@LoginActivity, ProfileActivity::class.java)
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
                             finish() // Sebaiknya akhiri activity saat login berhasil
                         } else {

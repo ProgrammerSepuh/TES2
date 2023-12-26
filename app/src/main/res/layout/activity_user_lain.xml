@@ -39,10 +39,10 @@
             app:layout_constraintTop_toBottomOf="@+id/headerAtas" />
 
         <TextView
-            android:id="@+id/userIdTextView"
+            android:id="@+id/textViewOtherUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="sans-serif-black"
             android:hint=""
             android:textColor="@color/black"
@@ -53,31 +53,124 @@
             app:layout_constraintTop_toBottomOf="@+id/headerAtas"
             tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:id="@+id/userEmailTextView"
+        <Button
+            android:id="@+id/btnFollow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@color/black"
-            android:textSize="15sp"
+            android:layout_marginTop="15dp"
+            android:text="follow me :)"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userIdTextView"
+            app:layout_constraintTop_toBottomOf="@+id/textViewOtherUsername"
             tools:ignore="MissingConstraints" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="339dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="34dp"
+            android:background="@drawable/bar"
+            android:gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnFollow"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/angkaFollower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="220"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+            <TextView
+                android:id="@+id/follower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="10dp"
+                android:hint="Followers" />
+
+            <TextView
+                android:id="@+id/angkaFollwing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-black"
+                android:hint="150" />
+
+            <TextView
+                android:id="@+id/following"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="60dp"
+                android:hint="Following" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="22dp"
+            android:gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:src="@drawable/globe" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ellipse" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:src="@drawable/instagram" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ellipse" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:src="@drawable/facebook" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="180dp"
             android:layout_height="40dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="26dp"
             android:layout_marginEnd="-3dp"
             android:background="@drawable/kotak"
             android:gravity="center_horizontal"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userEmailTextView"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
             tools:ignore="MissingConstraints">
 
             <TextView
@@ -98,7 +191,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="50dp"
-                android:hint="Post" />
+                android:hint="Shots" />
 
         </LinearLayout>
 
@@ -107,13 +200,13 @@
             android:layout_width="180dp"
             android:layout_height="40dp"
             android:layout_marginStart="-3dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="26dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/kotak"
             android:gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/linearLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/userEmailTextView"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
             tools:ignore="MissingConstraints">
 
             <TextView
@@ -138,28 +231,25 @@
 
         </LinearLayout>
 
-
-
-        <Button
-            android:id="@+id/btnUpdate"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="update"
+            android:layout_marginTop="31dp"
+            android:src="@drawable/konten_akun"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
         <androidx.cardview.widget.CardView
 
-            android:id="@+id/cardView"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="90dp"
             app:cardCornerRadius="60dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnUpdate">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -169,17 +259,6 @@
                 android:scaleType="centerCrop"
                 tools:src="@drawable/windah" />
         </androidx.cardview.widget.CardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyProfil"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="85dp"
-            android:layout_marginBottom="65dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userEmailTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

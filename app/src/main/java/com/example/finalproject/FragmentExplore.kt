@@ -5,19 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentExplore.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentExplore : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -29,12 +26,42 @@ class FragmentExplore : Fragment() {
         }
     }
 
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var imageAdapter: ImageAdapter
+    private lateinit var storageReference: StorageReference
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_explore, container, false)
+        val view = inflater.inflate(R.layout.fragment_explore, container, false)
+        recyclerView = view.findViewById(R.id.recyclerViewImages)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3) // Adjust the number of columns as needed
+
+        val imageUrlList: MutableList<String> = mutableListOf()
+
+        storageReference = FirebaseStorage.getInstance().reference.child("images")
+
+        // Ganti path sesuai dengan lokasi gambar di Firebase Storage
+        storageReference.listAll().addOnSuccessListener { result ->
+            for (imageRef in result.items) {
+                imageRef.downloadUrl.addOnSuccessListener { uri ->
+                    val imageUrl = uri.toString()
+                    imageUrlList.add(imageUrl)
+
+                    // Setelah mendapatkan daftar URL gambar, inisialisasikan adapter RecyclerView
+                    imageAdapter = ImageAdapter(imageUrlList)
+                    recyclerView.adapter = imageAdapter
+                }.addOnFailureListener { exception ->
+                    // Handle jika gagal mendapatkan URL gambar
+                }
+            }
+        }.addOnFailureListener {
+            // Handle jika gagal mendapatkan daftar gambar dari Firebase Storage
+        }
+
+        return view
     }
 
     companion object {
