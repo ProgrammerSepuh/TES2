@@ -28,76 +28,32 @@ private const val ARG_PARAM2 = "param2"
 class FragmentProfile : Fragment() {
 
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var userRef: DatabaseReference
     private lateinit var database: FirebaseDatabase
     private lateinit var userReference: DatabaseReference
-    private lateinit var view: View
     private lateinit var textViewUsername: TextView
     private lateinit var textViewEmail: TextView
-
-    companion object {
-        private const val ARG_PARAM1 = "param1"
-        private const val ARG_PARAM2 = "param2"
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentProfile().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         firebaseAuth = FirebaseAuth.getInstance()
-        userRef = FirebaseDatabase.getInstance().reference.child("users")
-            .child(firebaseAuth.currentUser?.uid ?: "")
         database = FirebaseDatabase.getInstance()
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        view = inflater.inflate(R.layout.fragment_profile, container, false)
-
-        val userEmailTextView = view.findViewById<TextView>(R.id.userEmailTextView)
-        val usernameTextView = view.findViewById<TextView>(R.id.userIdTextView)
-
-        val currentUser: FirebaseUser? = firebaseAuth.currentUser
-        val userEmail = currentUser?.email
-        userEmail?.let {
-            userEmailTextView.text = it
-        }
-
-        userRef.child("username").get().addOnSuccessListener { snapshot ->
-            val username = snapshot.value as? String
-            username?.let {
-                usernameTextView.text = it
-            }
-        }.addOnFailureListener {
-            // Handle failure
-        }
-
-        // Fetch and display user images
-        fetchUserImages(currentUser?.uid ?: "")
-
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val recyclerView: RecyclerView = view.findViewById(R.id.recyProfil)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
-
-        val currentUser = firebaseAuth.currentUser
-        val userId = currentUser?.uid
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         textViewUsername = view.findViewById(R.id.userIdTextView)
         textViewEmail = view.findViewById(R.id.userEmailTextView)
+        // Lakukan inisialisasi view lainnya sesuai kebutuhan
+
+        // Di dalam metode onCreateView
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyProfil)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        val currentUser = firebaseAuth.currentUser
+        val userId = currentUser?.uid
 
         userId?.let { uid ->
             val userReference = database.reference.child("users").child(uid)
@@ -108,29 +64,23 @@ class FragmentProfile : Fragment() {
                         val username = userSnapshot.child("username").getValue(String::class.java)
                         val email = userSnapshot.child("email").getValue(String::class.java)
 
-                        username?.let {
-                            textViewUsername.text = "@$it"
-                        }
-
-                        email?.let {
-                            textViewEmail.text = it
-                        }
+                        textViewUsername.text = "@$username"
+                        textViewEmail.text = "$email"
 
                         fetchUserImages(uid)
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Failed to read user data.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    // Handle error saat membaca data dari Firebase
                 }
             })
         }
-    }
 
+        // ... bagian lain dari kode yang memuat daftar gambar pengguna ke RecyclerView ...
+
+        return view
+    }
     private fun fetchUserImages(uid: String) {
         val uploadsRef = database.reference.child("uploads").orderByChild("s").equalTo(uid)
 
@@ -148,46 +98,26 @@ class FragmentProfile : Fragment() {
                     }
                 }
 
-                val recyclerView: RecyclerView = view.findViewById(R.id.recyProfil)
-                recyclerView.adapter = ImageUserAdapter(requireContext(), imageList, descriptionList)
+                val recyclerView: RecyclerView = requireView().findViewById(R.id.recyProfil)
+                recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+                val imageAdapter = ImageUserAdapter(requireContext(), imageList, descriptionList)
+                recyclerView.adapter = imageAdapter
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(
-                    requireContext(),
-                    "Failed to read user images.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                // Handle error saat mengambil data dari Firebase
             }
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        val currentUser = firebaseAuth.currentUser
-        val userId = currentUser?.uid
-
-        userId?.let { uid ->
-            userReference = database.reference.child("users").child(uid)
-
-            userReference.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        val username = snapshot.child("username").value.toString()
-                        val email = snapshot.child("email").value.toString()
-
-                        textViewUsername.text = "@$username"
-                        textViewEmail.text = "$email"
-
-                        fetchUserImages(uid)
-                    }
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            FragmentProfile().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
                 }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(requireContext(), "Failed to read user data.", Toast.LENGTH_SHORT).show()
-                }
-            })
-        }
+            }
     }
 }
